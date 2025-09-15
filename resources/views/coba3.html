@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coba 3</title>
+
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        background-color: #eee;
+      }
+
+      #wadah-card {
+        background-color: rgb(73, 206, 206);
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cards {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+
+      .card {
+        background-color: rgb(82, 44, 136);
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        padding: 10px;
+
+        border: rgb(193, 71, 71) 2px solid;
+      }
+
+      .card div {
+        margin-top: 15px;
+        text-align: center;
+        border-radius: 10px;
+
+        font-size: x-large;
+        font-weight: bold;
+        color: white;
+      }
+
+      .controls {
+        margin-top: 15px;
+        text-align: center;
+      }
+
+      .controls button {
+        margin: 0 5px;
+        padding: 8px 15px;
+        font-size: 16px;
+        cursor: pointer;
+
+        background-color: rgb(37, 143, 37);
+        color: white;
+        border: none;
+        border-radius: 20px;
+      }
+
+      .controls button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+
+
+    </style>
+</head>
+<body>
+
+
+    <div id="wadah-card">
+      <div class="cards" id="cards"
+      data-aos="zoom-out">
+        <div class="card">
+          <div>card 1</div>
+        </div>
+        <div class="card">
+          <div>card 2</div>
+        </div>
+        <div class="card">
+          <div>card 3</div>
+        </div>
+        <div class="card">
+          <div>card 4</div>
+        </div>
+        <div class="card">
+          <div>card 5</div>
+        </div>
+        <div class="card">
+          <div>card 6</div>
+        </div>
+        <div class="card">
+          <div>card 7</div>
+        </div>
+        <div class="card">
+          <div>card 8</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="btn-left">
+        <== geser kiri
+      </button>
+      <button id="btn-right">
+        geser kanan ==>
+      </button>
+    </div>
+    
+
+
+
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+       AOS.init()
+
+      const cardsContainer = document.getElementById('cards');
+      const jumlahCard = cardsContainer.children.length;
+      const jumlahCardsTerlihat = 3;
+      let indexCardKiri = 0;
+
+      const btnLeft = document.getElementById('btn-left');
+      const btnRight = document.getElementById('btn-right');
+
+      function updateSlider() {
+        const cardWidth = cardsContainer.children[0].offsetWidth;
+        cardsContainer.style.transform = `translateX(-${indexCardKiri * cardWidth}px)`;
+
+        btnLeft.disabled = indexCardKiri === 0;
+        btnRight.disabled = indexCardKiri >= jumlahCard - jumlahCardsTerlihat;
+      }
+
+
+      btnLeft.addEventListener('click', () => {
+        if(indexCardKiri > 0) {
+          indexCardKiri--;
+          updateSlider();
+        }
+      });
+
+      btnRight.addEventListener('click', () => {
+        if(indexCardKiri < jumlahCard - jumlahCardsTerlihat) {
+          indexCardKiri++;
+          updateSlider();
+        }
+      });
+
+      // init awal
+      updateSlider();
+    </script>
+</body>
+</html>

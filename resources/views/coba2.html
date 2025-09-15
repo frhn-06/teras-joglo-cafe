@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tolol</title>
+    <style>
+        body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .carousel {
+      display: flex;
+      overflow: hidden;
+      width: 300px; /* lebar viewport */
+      border: 1px solid #ccc;
+    }
+
+    .track {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .item {
+      min-width: 300px; /* sama dengan lebar viewport */
+      text-align: center;
+      font-size: 2rem;
+      padding: 50px 0;
+      background: lightblue;
+      border-right: 1px solid white;
+    }
+
+    .buttons {
+      margin-top: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+    <div class="track" id="track">
+      <div class="item">0</div>
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+  </div>
+
+  <script>
+    const track = document.getElementById("track");
+    const items = document.querySelectorAll(".item");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    let index = 0; // mulai dari item kedua (0)
+    const itemWidth = items[0].offsetWidth;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(${-index * itemWidth}px)`;
+    }
+
+    next.addEventListener("click", () => {
+      if (index < items.length - 1) index++;
+      updateCarousel();
+    });
+
+    prev.addEventListener("click", () => {
+      if (index > 0) index--;
+      updateCarousel();
+    });
+
+    updateCarousel();
+  </script>
+</body>
+</html>
